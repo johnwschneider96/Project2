@@ -39,11 +39,6 @@ public class UserDao {
 	public void update(User u) {sf.getCurrentSession().update(u);}
 	
 	/**
-	 * @param u the post object you want to delete in the database
-	 */
-	public void delete(User u) {sf.getCurrentSession().delete(u);}
-	
-	/**
 	 * @param email the post object you want to enter into the database
 	 * @return the user with the selected email
 	 */
