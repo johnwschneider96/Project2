@@ -1,15 +1,18 @@
 package com.p2.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.p2.model.Story;
 import com.p2.service.StoryService;
 
@@ -34,9 +37,15 @@ public class StoryController {
 	 * 
 	 * @param story the story object in the database
 	 */
-	@PostMapping(value="/insertpost")
-	public void insertPost(@RequestParam("new_post") Story story) {
-		storyServ.insert(story);
+	@PostMapping(value = "/insertuser")
+	public void insertPost(@RequestBody String jsonString) {
+		Story s = null;
+		try {
+			s = new ObjectMapper().readValue(jsonString, Story.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		storyServ.insert(s);
 	}
 	
 	/**
@@ -44,9 +53,15 @@ public class StoryController {
 	 * 
 	 * @param story the story object in the database
 	 */
-	@PostMapping(value="/updatepost")
-	public void updatePost(@RequestParam("post") Story story) {
-		storyServ.update(story);
+	@PostMapping(value = "/updateuser")
+	public void updatePost(@RequestBody String jsonString) {
+		Story s = null;
+		try {
+			s = new ObjectMapper().readValue(jsonString, Story.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		storyServ.update(s);;
 	}
 	
 	/**
