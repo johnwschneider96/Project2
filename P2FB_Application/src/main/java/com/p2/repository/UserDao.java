@@ -10,17 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 import com.p2.model.User;
 
 /**
- * @author Barton Carson
- * @since 2019-9-11
+ * User Dao for accessing the database
+ * 
+ * @author Barton Carson & John Schneider
+ * @since 2019-9-13
  */
 @Repository("userRepo")
 @Transactional
 public class UserDao {
 
-	@Autowired
 	/**
-	 * This session factory holds our current session when accessing our database 
+	 * Autowired session factory for the user dao
 	 */
+	@Autowired
 	private SessionFactory sf;
 	
 	/**
@@ -29,24 +31,32 @@ public class UserDao {
 	public UserDao() {}
 	
 	/**
-	 * @param u the post object you want to enter into the database
+	 * Dao method that inserts the user into the database
+	 * 
+	 * @param u the user object in the database
 	 */
 	public void insert(User u) {sf.getCurrentSession().save(u);}
 	
 	/**
-	 * @param u the post object you want to update in the database
+	 * Dao method that updates the user in the database
+	 * 
+	 * @param u the user object in the database
 	 */
 	public void update(User u) {sf.getCurrentSession().update(u);}
 	
 	/**
-	 * @param email the post object you want to enter into the database
-	 * @return the user with the selected email
+	 * Dao method that select the user based on the user email from the database
+	 * 
+	 * @param email from the user
+	 * @return user with the given email in the database
 	 */
 	public User selectByEmail(String email) {return sf.getCurrentSession().get(User.class, email);}
 	
 	/**
+	 * Dao method that selects all stories for all users from the database
+	 * 
 	 * @return all users in the database
 	 */
-	public List<User> selectAll() {return sf.getCurrentSession().createQuery("from User", User.class).list();}
+	public List<User> selectAll() {return sf.getCurrentSession().createQuery("FROM User", User.class).list();}
 	
 }

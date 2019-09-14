@@ -16,8 +16,8 @@ public class User {
 	@Column(name = "p2sq_password")
 	private String password;
 	
-	@Column(name = "p2sq_image_ref")
-	private String imageref;
+	@Column(name = "p2sq_filename")
+	private String filename;
 	
 	@Column(name = "p2sq_first_name")
 	private String firstname;
@@ -32,11 +32,20 @@ public class User {
 		super();
 	}
 
-	public User(String email, String password, String imageref, String firstname, String lastname, String phonenumber) {
+	public User(String email, String password, String filename, String firstname, String lastname, String phonenumber) {
 		super();
 		this.email = email;
 		this.password = password;
-		this.imageref = imageref;
+		this.filename = filename;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phonenumber = phonenumber;
+	}
+
+	public User(String email, String password, String firstname, String lastname, String phonenumber) {
+		super();
+		this.email = email;
+		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.phonenumber = phonenumber;
@@ -46,8 +55,8 @@ public class User {
 	public void setEmail(String email) {this.email = email;}
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
-	public String getImageref() {return imageref;}
-	public void setImageref(String imageref) {this.imageref = imageref;}
+	public String getFilename() {return filename;}
+	public void setFilename(String filename) {this.filename = filename;}
 	public String getFirstname() {return firstname;}
 	public void setFirstname(String firstname) {this.firstname = firstname;}
 	public String getLastname() {return lastname;}
@@ -57,7 +66,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", password=" + password + ", imageref=" + imageref + ", firstname=" + firstname
+		return "User [email=" + email + ", password=" + password + ", filename=" + filename + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", phonenumber=" + phonenumber + "]";
 	}
 }
