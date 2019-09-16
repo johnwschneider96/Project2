@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,11 +21,12 @@ import com.p2.service.UserService;
 /**
  * User Controller for accepting and sending data to the front-end angular application
  * 
- * @author Barton Carson
+ * @author Barton Carson & John Schneider
  * @since 2019-9-13
  */
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200"})
+//@Component("appProxy")
 public class UserController {
 	
 	/**
@@ -38,7 +41,7 @@ public class UserController {
 	 * @param user the user object in the database
 	 */
 	@PostMapping(value = "/insertuser")
-	public void insertPost(@RequestBody String jsonString) {
+	public void insertUser(@RequestBody String jsonString) {
 		User u = null;
 		try {
 			u = new ObjectMapper().readValue(jsonString, User.class);
@@ -54,7 +57,7 @@ public class UserController {
 	 * @param user the user object in the database
 	 */
 	@PostMapping(value = "/updateuser")
-	public void updatePost(@RequestBody String jsonString) {
+	public void updateUser(@RequestBody String jsonString) {
 		User u = null;
 		try {
 			u = new ObjectMapper().readValue(jsonString, User.class);
@@ -70,8 +73,8 @@ public class UserController {
 	 * @param email of the user
 	 * @return the user with the requested email
 	 */
-	@GetMapping(value = "/getuserbyemail")
-	public @ResponseBody User getUserByEmail(@RequestParam("email") String email) {
+	@GetMapping(value="{email}/userbyemail")
+	public @ResponseBody User getUserByEmail(@PathVariable("email") String email) {
 		return userServ.selectByEmailUser(email);
 	}
 	
@@ -80,7 +83,7 @@ public class UserController {
 	 * 
 	 * @return all users in the database
 	 */
-	@GetMapping(value = "/getallusers")
+	@GetMapping(value = "/allusers")
 	public @ResponseBody List<User> getAllUsers() {
 		return userServ.selectAllUsers();
 	}

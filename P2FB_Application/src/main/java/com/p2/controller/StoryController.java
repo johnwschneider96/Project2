@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +37,7 @@ public class StoryController {
 	 * 
 	 * @param story the story object in the database
 	 */
-	@PostMapping(value = "/insertuser")
+	@PostMapping(value = "/insertstory")
 	public void insertPost(@RequestBody String jsonString) {
 		Story s = null;
 		try {
@@ -53,7 +53,7 @@ public class StoryController {
 	 * 
 	 * @param story the story object in the database
 	 */
-	@PostMapping(value = "/updateuser")
+	@PostMapping(value = "/updatestory")
 	public void updatePost(@RequestBody String jsonString) {
 		Story s = null;
 		try {
@@ -61,7 +61,7 @@ public class StoryController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		storyServ.update(s);;
+		storyServ.update(s);
 	}
 	
 	/**
@@ -70,8 +70,8 @@ public class StoryController {
 	 * @param email from the user that created the post
 	 * @return all posts for the given user
 	 */
-	@GetMapping(value="/userposts")
-	public @ResponseBody List<Story> selectUserPosts(@RequestParam("email") String email) {
+	@GetMapping(value="{email}/userstorys")
+	public @ResponseBody List<Story> selectUserPosts(@PathVariable("email") String email) {
 		return storyServ.selectStoriesByEmail(email);
 	}
 	
@@ -80,7 +80,7 @@ public class StoryController {
 	 * 
 	 * @return all posts from all users
 	 */
-	@GetMapping(value="/allposts")
+	@GetMapping(value="/allstorys")
 	public @ResponseBody List<Story> selectAllPosts() {
 		return storyServ.selectAllStories();
 	}
