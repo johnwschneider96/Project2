@@ -1,0 +1,23 @@
+<h3 class="display-3">Register</h3>
+<br/>
+<h5 class="display-5">First Name:</h5>
+<div class="form-group">
+    <input type="text" class="form-control" id="firstname" placeholder="Enter your First Name" [(ngModel)]="firstname">
+  </div>
+<h5 class="display-5">Last Name:</h5>
+<div class="form-group">
+    <input type="lastname" class="form-control" id="lastname" placeholder="Enter your Last Name" [(ngModel)]="lastname">
+  </div>
+<h5 class="display-5">Email:</h5>
+<div class="form-group">
+    <input type="email" class="form-control" id="email" placeholder="Enter your Email" [(ngModel)]="email">
+  </div>
+<h5 class="display-5">Password:</h5>
+<div class="form-group">
+    <input type="password" class="form-control" id="password" placeholder="Enter your desired Password" [(ngModel)]="password">
+  </div>
+  <h5 class="display-5">Phone Number:</h5>
+  <div class="form-group">
+      <input type="phonenumber" class="form-control" id="phonenumber" placeholder="Enter your Password" [(ngModel)]="phonenumber">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)='submitNewUser()'>Submit</button>
