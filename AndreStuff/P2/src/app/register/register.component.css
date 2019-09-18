@@ -1,7 +1,12 @@
 .formtitle {
-    font-family:monospace;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16pt;
-    font-style: oblique;
+}
+
+.headthing {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 31pt;
 }
 
 #footer {

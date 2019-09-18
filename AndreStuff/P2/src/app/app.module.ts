@@ -8,6 +8,8 @@ import {RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RequestResetComponent } from './request-reset/request-reset.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { HomeComponent } from './home/home.component';
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ResetPasswordComponent,
+    RequestResetComponent
   ],
   imports: [
     BrowserModule,
