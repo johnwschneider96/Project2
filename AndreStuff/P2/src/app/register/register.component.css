@@ -1,0 +1,13 @@
+.formtitle {
+    font-family:monospace;
+    font-size: 16pt;
+    font-style: oblique;
+}
+
+#footer {
+    background-color: #28A745;
+    color: #FFF;
+	padding: 0px 5px 5px 0px;
+    text-align: center;
+    
+}
