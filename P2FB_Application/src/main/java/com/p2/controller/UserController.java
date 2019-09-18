@@ -3,18 +3,19 @@ package com.p2.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.p2.encrypt.PasswordEncryption;
 import com.p2.model.User;
 import com.p2.service.UserService;
 
@@ -26,14 +27,18 @@ import com.p2.service.UserService;
  */
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200"})
-//@Component("appProxy")
 public class UserController {
 	
+	/**
+	 * Logger for user controller
+	 */
+	private final static Logger loggy = Logger.getLogger(StoryController.class);
 	/**
 	 * Autowired user service for the user controller
 	 */
 	@Autowired
 	UserService userServ;
+	
 	
 	/**
 	 * Insert controller method that inserts the user in the database
@@ -45,9 +50,11 @@ public class UserController {
 		User u = null;
 		try {
 			u = new ObjectMapper().readValue(jsonString, User.class);
+			u.setPassword(PasswordEncryption.encrypt(u.getPassword(), "Clemson"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		loggy.info("Insert User Controller Accessed");
 		userServ.insertUser(u);
 	}
 	
@@ -56,14 +63,16 @@ public class UserController {
 	 * 
 	 * @param user the user object in the database
 	 */
-	@PostMapping(value = "/updateuser")
+	@PutMapping(value = "/updateuser")
 	public void updateUser(@RequestBody String jsonString) {
 		User u = null;
 		try {
 			u = new ObjectMapper().readValue(jsonString, User.class);
+			u.setPassword(PasswordEncryption.encrypt(u.getPassword(), "Clemson"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		loggy.info("Update User Controller Accessed");
 		userServ.updateUser(u);
 	}
 	
@@ -75,7 +84,10 @@ public class UserController {
 	 */
 	@GetMapping(value="{email}/userbyemail")
 	public @ResponseBody User getUserByEmail(@PathVariable("email") String email) {
-		return userServ.selectByEmailUser(email);
+		User u = userServ.selectByEmailUser(email);
+		u.setPassword(PasswordEncryption.decrypt(u.getPassword(), "Clemson"));
+		loggy.info("Single User pulled from the database");
+		return u;
 	}
 	
 	/**
@@ -85,6 +97,7 @@ public class UserController {
 	 */
 	@GetMapping(value = "/allusers")
 	public @ResponseBody List<User> getAllUsers() {
+		loggy.info("List of all Users pulled from the database");
 		return userServ.selectAllUsers();
 	}
 }

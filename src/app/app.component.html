@@ -1,6 +1,21 @@
-<nav>
-    <a routerLink="/profile" routerLinkActive="active">Profile</a>
-    <a routerLink="/login" routerLinkActive="active">Login</a>
-    <a routerLink="/register" routerLinkActive="active">Register</a>
-  </nav>
-  <router-outlet></router-outlet>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/feed">Home</a>
+      <a class="nav-item nav-link" routerLink="/profile">Profile</a>
+      <a class="nav-item nav-link" (click)="logout()" routerLink="/login">Logout</a>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+      </form>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6 offset-sm-3">
+              <router-outlet></router-outlet>
+          </div>
+      </div>
+  </div>
+</div>

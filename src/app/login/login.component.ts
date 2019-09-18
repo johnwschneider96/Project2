@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
      });
-    this.returnUrl = '/profile';
+    this.returnUrl = '/feed';
     this.authService.logout();
   }
 
@@ -40,19 +40,28 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  resetPassword(email: string) {
+    this.authService.resetPassword(email);
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
     } else {
       this.getuserbyemail();
-      if (this.f.email.value === this.myresponse.email && this.f.password.value === this.myresponse.password) {
-        alert('Login Successful');
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('token', this.f.email.value);
-        this.router.navigate([this.returnUrl]);
-      } else {
-        this.message = 'Please check your email and password';
+      if (this.myresponse === null) {
+        alert('Login Failed');
       }
+      setTimeout(() => {
+        if (this.f.email.value === this.myresponse.email && this.f.password.value === this.myresponse.password) {
+          alert('Login Successful');
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('token', JSON.stringify(this.myresponse));
+          this.router.navigate([this.returnUrl]);
+        } else {
+          this.message = 'Please check your email and password';
+        }
+      }, 1000);
     }
   }
 }

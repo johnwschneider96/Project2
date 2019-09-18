@@ -19,6 +19,7 @@
 
 	<context:component-scan base-package="com.p2" />
 
+	<!-- Change for whatever RDS you are using -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
@@ -29,6 +30,7 @@
 			value="jdbc:oracle:thin:@lestercarson.cij8ici48e2h.us-east-2.rds.amazonaws.com:1521:ORCL"></property>
 	</bean>
 
+	<!-- change hibernate.hbm2ddl.auto to create to create tables, then change to update after the first run -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
