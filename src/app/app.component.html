@@ -1,21 +1,18 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="nav.visible">
   <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/feed">Home</a>
       <a class="nav-item nav-link" routerLink="/profile">Profile</a>
-      <a class="nav-item nav-link" (click)="logout()" routerLink="/login">Logout</a>
+      <a class="nav-item nav-link" routerLink="/login">Logout</a>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
       </form>
+      <h5>Welcome to Social Queue!!!!</h5>
   </div>
 </nav>
 
 <div class="jumbotron">
   <div class="container">
-      <div class="row">
-          <div class="col-sm-6 offset-sm-3">
-              <router-outlet></router-outlet>
-          </div>
-      </div>
+      <router-outlet></router-outlet>
   </div>
 </div>

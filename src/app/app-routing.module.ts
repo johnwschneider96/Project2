@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'feed', component: FeedComponent, canActivate : [AuthGuard]},
-  {path: '**', redirectTo: 'login' }
+  {path: '**', redirectTo: 'feed' }
 
 ];
 

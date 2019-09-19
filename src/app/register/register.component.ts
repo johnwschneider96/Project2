@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { NavbarService } from '../navbar.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthGuard } from '../auth.guard';
 
 @Component({
   selector: 'app-register',
@@ -9,32 +12,87 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
-  email: string;
-  password: string;
+  registerForm: FormGroup;
+  submitted = false;
   filename: string;
-  firstname: string;
-  lastname: string;
-  phonenumber: string;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public nav: NavbarService,
+    private formBuilder: FormBuilder,
+    private authGuard: AuthGuard
+    ) {
+      if (this.authGuard.isLoggedIn()) {
+        this.router.navigate(['/feed']);
+      }
+    }
 
-  submitNewUser() {
-    this.filename = '';
-    const theUser = new User(this.email, this.password, this.filename, this.firstname, this.lastname, this.phonenumber);
+  ngOnInit() {
+    this.nav.hide();
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNumber: ['', Validators.required]
+    });
+  }
 
+  get f() { return this.registerForm.controls; }
+
+  submitNewUser(theUser: User) {
     this.http.post('http://localhost:9005/P2FB_Application/insertuser', JSON.stringify(theUser)).subscribe(
       data => {
-        console.log(data);
-        console.log(theUser);
+        alert('Registration Successful');
       },
       error => {
         console.log('Error Occured:' + error);
         alert('Regstration failed');
       }
     );
-    alert('Registration Successful');
+  }
+
+  async uploadFile(event: any) {
+    const file = event.target.files[0];
+    this.filename = (document.getElementById('get-file-input') as HTMLInputElement).value;
+    // window.test = event.target;
+
+    const urlResponse = await fetch('http://localhost:9005/P2FB_Application/s3/' + file.name, { method: 'PUT'});
+    const signedUrl = await urlResponse.text();
+
+    console.log(file);
+    const s3Response = await fetch(signedUrl, { method: 'PUT', body: file });
+  }
+
+  async getFile(event: any) {
+    const input = (document.getElementById('get-file-input') as HTMLInputElement);
+
+    const urlResponse = await fetch('http://localhost:9005/P2FB_Application/s3/' + input.value, {
+      method: 'GET'
+    });
+    const signedUrl = await urlResponse.text();
+
+    const image = (document.getElementById('file-img') as HTMLInputElement);
+    image.src = signedUrl;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+    const theUser = new User(
+      this.registerForm.get('email').value,
+      this.registerForm.get('password').value,
+      this.filename,
+      this.registerForm.get('firstName').value,
+      this.registerForm.get('lastName').value,
+      this.registerForm.get('phoneNumber').value
+    );
+    this.submitNewUser(theUser);
     this.router.navigate(['/login']);
   }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { User } from './user';
+import { NavbarService } from './navbar.service';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +9,8 @@ import { User } from './user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'project2';
-  currentUser: string;
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-) {
-    this.currentUser = localStorage.getItem('token');
-  }
+  constructor(private router: Router, private authService: AuthService, public nav: NavbarService) {}
 
   logout() {
     this.authService.logout();

@@ -15,8 +15,7 @@ export class AuthService {
 
   async resetPassword(email: string) {
     const auth = firebase.auth();
-    return auth.sendPasswordResetEmail(email)
-      .then(() => console.log('email sent'))
-      .catch((error: any) => console.log(error));
+    // auth.confirmPasswordReset('1234', 'password');
+    return auth.sendPasswordResetEmail(email).then(() => console.log('email sent')).catch((error: any) => console.log(error));
   }
 }

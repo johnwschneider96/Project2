@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { NavbarService } from '../navbar.service';
+import { AuthGuard } from '../auth.guard';
 
 @Component({
   selector: 'app-login',
@@ -14,17 +16,30 @@ export class LoginComponent implements OnInit {
   myresponse: any;
   loginForm: FormGroup;
   message: string;
+  submitted = false;
   returnUrl: string;
 
-  constructor(private http: HttpClient, private router: Router, private fb: FormBuilder, public authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private authGuard: AuthGuard,
+    public nav: NavbarService
+  ) {
+    if (this.authGuard.isLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.fb.group ({
       email: ['', Validators.required],
       password: ['', Validators.required]
      });
-    this.returnUrl = '/feed';
     this.authService.logout();
+    this.returnUrl = '/feed';
+    this.nav.hide();
   }
 
   get f() { return this.loginForm.controls; }
@@ -45,6 +60,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     } else {
@@ -61,7 +77,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.message = 'Please check your email and password';
         }
-      }, 1000);
+      }, 2000);
     }
   }
 }
