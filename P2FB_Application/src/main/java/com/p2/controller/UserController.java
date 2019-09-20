@@ -86,6 +86,7 @@ public class UserController {
 	public @ResponseBody User getUserByEmail(@PathVariable("email") String email) {
 		User u = userServ.selectByEmailUser(email);
 		u.setPassword(PasswordEncryption.decrypt(u.getPassword(), "Clemson"));
+		System.out.println(u);
 		loggy.info("Single User pulled from the database");
 		return u;
 	}

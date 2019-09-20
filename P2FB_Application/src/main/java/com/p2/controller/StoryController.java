@@ -32,6 +32,7 @@ public class StoryController {
 	 * Logger for story controller
 	 */
 	private final static Logger loggy = Logger.getLogger(StoryController.class);
+	
 	/**
 	 * Autowired story service for the story controller
 	 */

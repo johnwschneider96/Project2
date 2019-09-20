@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Story } from '../story';
 
 @Component({
   selector: 'app-story',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoryComponent implements OnInit {
 
-  constructor() { }
+  myresponse: any;
+
+  @Input()
+  story: Story;
+
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {
   }
 
+  addLike(story: Story) {
+    story.numLikes = story.numLikes + 1;
+    this.http.put('http://localhost:9005/P2FB_Application/updatestory', JSON.stringify(story)).subscribe(
+      data => {
+      },
+      error => {
+        console.log('Error Occured:' + error);
+        alert('Like failed');
+      }
+    );
+  }
 }

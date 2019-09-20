@@ -1,9 +1,10 @@
-package com.p2.util;
+/*package com.p2.util;
 
 import java.net.URL;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -12,6 +13,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 
+@Component
 public class S3FileUtil implements InitializingBean {
 
 	@Value("${aws.s3.bucketName}")
@@ -57,4 +59,4 @@ public class S3FileUtil implements InitializingBean {
 				.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
 	}
 
-}
+}*/

@@ -55,10 +55,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  resetPassword(email: string) {
-    this.authService.resetPassword(email);
-  }
-
   onSubmit() {
     this.submitted = true;
     if (this.loginForm.invalid) {

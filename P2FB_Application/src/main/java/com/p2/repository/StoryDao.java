@@ -2,7 +2,9 @@ package com.p2.repository;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +52,16 @@ public class StoryDao {
 	 * @param email from the user that created the story
 	 * @return all stories for the given user email from the database
 	 */
-	public List<Story> selectStoriesByEmail(String email) {return sesFact.getCurrentSession().createQuery("FROM Story WHERE email=" + email, Story.class).list();}
+	public List<Story> selectStoriesByEmail(String email) {
+		Session session = sesFact.getCurrentSession();
+		String selectQuery = "FROM Story WHERE p2sq_email= :emailParam";
+		Query query = session.createQuery(selectQuery);
+		query.setParameter("emailParam", email);
+		//sesFact.getCurrentSession().createQuery("FROM Story WHERE email=" + email, Story.class).list();
+		@SuppressWarnings("unchecked")
+		List<Story> results = query.list();
+		return results;
+	}
 	
 	/**
 	 * Dao method that selects all stories for all users from the database
