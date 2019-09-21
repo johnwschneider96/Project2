@@ -10,6 +10,9 @@ import { Story } from '../story';
 export class StoryComponent implements OnInit {
 
   myresponse: any;
+  urlResponse: any;
+  signedUrl: any;
+  image: any;
 
   @Input()
   story: Story;
@@ -19,6 +22,18 @@ export class StoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.story.userEmail.filename !== null) {
+      this.getFile();
+    } else {
+      this.signedUrl = 'https://cdna.artstation.com/p/assets/images/images/000/282/854/large/hispter_final_FINAL.jpg?1415033893';
+    }
+  }
+
+  async getFile() {
+    this.urlResponse = await fetch('http://localhost:9005/P2FB_Application/s3/' + this.story.userEmail.filename, {
+      method: 'GET'
+    });
+    this.signedUrl = await this.urlResponse.text();
   }
 
   addLike(story: Story) {

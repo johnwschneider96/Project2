@@ -16,7 +16,6 @@ export class FeedComponent implements OnInit {
 
   story: Story;
   user: User;
-  content: string;
   postForm: FormGroup;
   myresponse: any;
   constructor(
@@ -25,7 +24,6 @@ export class FeedComponent implements OnInit {
     public authService: AuthService,
     private nav: NavbarService) {
     this.nav.show();
-    this.getAllStories();
   }
 
   getAllStories() {

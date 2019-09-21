@@ -4,8 +4,8 @@
       <a class="nav-item nav-link" routerLink="/profile">Profile</a>
       <a class="nav-item nav-link" routerLink="/login">Logout</a>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search by Email" aria-label="Search">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="newMessage()">Search</button>
       </form>
   </div>
 </nav>

@@ -15,8 +15,9 @@ import { NavbarService } from './navbar.service';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { SearchComponent } from './search/search.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,9 @@ import { CreatePostComponent } from './create-post/create-post.component';
     FeedComponent,
     StoryComponent,
     ResetPasswordComponent,
-    EditProfileComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    SearchComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

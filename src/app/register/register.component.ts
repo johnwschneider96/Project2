@@ -59,12 +59,11 @@ export class RegisterComponent implements OnInit {
   async uploadFile(event: any) {
     const file = event.target.files[0];
     this.filename = file.name;
-    // window.test = event.target;
 
-    const urlResponse = await fetch('http://localhost:9005/P2FB_Application/s3/' + file.name, { method: 'POST', });
+    const urlResponse = await fetch('http://localhost:9005/P2FB_Application/s3/' + file.name, { method: 'PUT' });
     const signedUrl = await urlResponse.text();
 
-    const s3Response = await fetch(signedUrl, { method: 'POST', body: file });
+    const s3Response = await fetch(signedUrl, { method: 'PUT', body: file });
   }
 
   /*fileEvent(fileInput: any) {

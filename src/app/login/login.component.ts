@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
       this.getuserbyemail();
       if (this.myresponse === null) {
         alert('Login Failed');
+        return;
       }
       setTimeout(() => {
         if (this.f.email.value === this.myresponse.email && this.f.password.value === this.myresponse.password) {

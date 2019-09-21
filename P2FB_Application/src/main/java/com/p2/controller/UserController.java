@@ -85,8 +85,10 @@ public class UserController {
 	@GetMapping(value="{email}/userbyemail")
 	public @ResponseBody User getUserByEmail(@PathVariable("email") String email) {
 		User u = userServ.selectByEmailUser(email);
+		if (u == null) {
+			return u;
+		}
 		u.setPassword(PasswordEncryption.decrypt(u.getPassword(), "Clemson"));
-		System.out.println(u);
 		loggy.info("Single User pulled from the database");
 		return u;
 	}

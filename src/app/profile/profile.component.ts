@@ -5,6 +5,7 @@ import { NavbarService } from '../navbar.service';
 import { User } from '../user';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,8 @@ export class ProfileComponent implements OnInit {
   filename = 'filename';
   submitted = false;
   profileForm: FormGroup;
+  message: string;
+  show: boolean;
 
   constructor(
     public authService: AuthService,
@@ -33,32 +36,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('token'));
     this.getuserstorys(this.user.email);
-    this.getuserbyemail(this.user.email);
-    console.log(JSON.stringify(this.myUserData));
-    // this.profileUser = JSON.parse(JSON.stringify(this.myUserData));
-    // console.log(this.profileUser.email);
-    // console.log(this.profileUser.email);
-   // if (this.user.email === this.profileUser.email) {
-   //   localStorage.setItem('token', JSON.stringify(this.profileUser));
-   // }
+
     this.profileForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       phoneNumber: ['', Validators.required]
     });
-  }
-
-  async getuserbyemail(email: string) {
-    this.http.get('http://localhost:9005/P2FB_Application/' + email + '/userbyemail').subscribe(
-      mydata => {
-        console.log(mydata);
-        this.myUserData = mydata;
-      },
-      error => {
-        console.log('Error occured', error);
-      }
-    );
   }
 
   getuserstorys(email: string) {

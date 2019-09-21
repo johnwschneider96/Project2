@@ -25,7 +25,7 @@ public class StoryDao {
 	 * Autowired session factory for the story dao
 	 */
 	@Autowired
-	SessionFactory sesFact;
+	SessionFactory sf;
 	
 	/**
 	 * default constructor
@@ -37,14 +37,14 @@ public class StoryDao {
 	 * 
 	 * @param s the story object in the database
 	 */
-	public void insert(Story s) {sesFact.getCurrentSession().save(s);}
+	public void insert(Story s) {sf.getCurrentSession().save(s);}
 	
 	/**
 	 * Dao method that updates the story in the database
 	 * 
 	 * @param s the story object in the database
 	 */
-	public void update(Story s) {sesFact.getCurrentSession().update(s);}
+	public void update(Story s) {sf.getCurrentSession().update(s);}
 	
 	/**
 	 * Dao method that selects all stories based on the user email from the database
@@ -53,12 +53,12 @@ public class StoryDao {
 	 * @return all stories for the given user email from the database
 	 */
 	public List<Story> selectStoriesByEmail(String email) {
-		Session session = sesFact.getCurrentSession();
-		String selectQuery = "FROM Story WHERE p2sq_email= :emailParam";
-		Query query = session.createQuery(selectQuery);
+		Session session = sf.getCurrentSession();
+		String selectQuery = "FROM Story WHERE p2sq_email= :emailParam ORDER BY post_id DESC";
+		@SuppressWarnings("unchecked")
+		Query<Story> query = session.createQuery(selectQuery);
 		query.setParameter("emailParam", email);
 		//sesFact.getCurrentSession().createQuery("FROM Story WHERE email=" + email, Story.class).list();
-		@SuppressWarnings("unchecked")
 		List<Story> results = query.list();
 		return results;
 	}
@@ -68,5 +68,7 @@ public class StoryDao {
 	 * 
 	 * @return all stories for all users from the database
 	 */
-	public List<Story> selectAllStories() {return sesFact.getCurrentSession().createQuery("FROM Story", Story.class).getResultList();}
+	public List<Story> selectAllStories() {
+		return sf.getCurrentSession().createQuery("FROM Story ORDER BY post_id DESC", Story.class).getResultList();
+	}
 }
