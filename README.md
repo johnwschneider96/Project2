@@ -1,1 +1,1 @@
-# Project2 Barton's Stuff
+# Project2 Stuff
