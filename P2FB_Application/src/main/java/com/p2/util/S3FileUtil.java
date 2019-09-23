@@ -3,7 +3,6 @@ package com.p2.util;
 import java.net.URL;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.HttpMethod;
@@ -29,7 +28,7 @@ public class S3FileUtil implements InitializingBean {
 
 	public String createSignedUrl(String fileName, HttpMethod method) {
 
-		System.out.println(accessKey);
+		//System.out.println(accessKey);
 
 		// Set the presigned URL to expire after one minute.
 		java.util.Date expiration = new java.util.Date();
@@ -38,18 +37,18 @@ public class S3FileUtil implements InitializingBean {
 		expiration.setTime(expTimeMillis);
 
 		// Generate the presigned URL.
-		System.out.println("Generating pre-signed URL.");
+		//System.out.println("Generating pre-signed URL.");
 		GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName, fileName)
 				.withMethod(method).withExpiration(expiration);
 		URL url = s3Client.generatePresignedUrl(generatePresignedUrlRequest);
 
-		System.out.println("Pre-Signed URL: " + url.toString());
+		//System.out.println("Pre-Signed URL: " + url.toString());
 		return url.toString();
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		System.out.println(accessKey);
+		//System.out.println(accessKey);
 		awsCreds = new BasicAWSCredentials(accessKey, secretAccessKey);
 		s3Client = AmazonS3ClientBuilder.standard().withRegion(region)
 				.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();

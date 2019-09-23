@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +55,18 @@ public class CommentController {
 		}
 		loggy.info("Insert Comment Controller Accessed");
 		commentServ.insert(c);
+	}
+	
+	@PutMapping(value = "/updatecomment")
+	public void updatePost(@RequestBody String jsonString) {
+		Comment c = null;
+		try {
+			c = new ObjectMapper().readValue(jsonString, Comment.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		loggy.info("Update Story Controller Accessed");
+		commentServ.update(c);
 	}
 	
 	/**

@@ -38,6 +38,15 @@ public class CommentService {
 	}
 	
 	/**
+	 * Service method that connects the comment dao update to comment controller
+	 * 
+	 * @param c the comment object to update
+	 */
+	public void update(Comment c) {
+		commentDao.update(c);
+	}
+	
+	/**
 	 * Service method that connects the comment dao select method to comment controller
 	 * 
 	 * @param id from the story that created the comment

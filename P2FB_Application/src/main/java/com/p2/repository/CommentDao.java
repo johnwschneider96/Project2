@@ -34,6 +34,13 @@ public class CommentDao {
 	public void insert(Comment c) {sf.getCurrentSession().save(c);}
 	
 	/**
+	 * Dao method that updates the comment in the database
+	 * 
+	 * @param c the comment object in the database
+	 */
+	public void update(Comment c) {sf.getCurrentSession().update(c);}
+	
+	/**
 	 * Dao method that selects all comment based on the post id from the database
 	 * 
 	 * @param id from the poster that created the comment
@@ -41,11 +48,10 @@ public class CommentDao {
 	 */
 	public List<Comment> selectCommentsByPostId(int id) {
 		Session session = sf.getCurrentSession();
-		String selectQuery = "FROM Comment WHERE post_id= :id";
+		String selectQuery = "FROM Comment WHERE post_id= :id ORDER BY comment_id DESC";
 		@SuppressWarnings("unchecked")
 		Query<Comment> query = session.createQuery(selectQuery);
 		query.setParameter("id", id);
-		//sesFact.getCurrentSession().createQuery("FROM Comment WHERE email=" + email, Story.class).list();
 		List<Comment> results = query.list();
 		return results;
 	}

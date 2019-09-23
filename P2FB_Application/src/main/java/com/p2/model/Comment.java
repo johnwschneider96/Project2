@@ -27,15 +27,20 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name="post_id", nullable=false)
 	private Story story;
+	
+	@ManyToOne
+	@JoinColumn(name="user_email", nullable=false)
+	private User user;
 
 	public Comment() {}
 
-	public Comment(int commentId, String content, int numLikes, Story story) {
+	public Comment(int commentId, String content, int numLikes, Story story, User user) {
 		super();
 		this.commentId = commentId;
 		this.content = content;
 		this.numLikes = numLikes;
 		this.story = story;
+		this.user = user;
 	}
 
 	public int getCommentId() {
@@ -70,9 +75,17 @@ public class Comment {
 		this.story = story;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Comment [commentId=" + commentId + ", content=" + content + ", numLikes=" + numLikes + ", story="
-				+ story + "]";
+				+ story + ", user=" + user + "]";
 	}
 }
