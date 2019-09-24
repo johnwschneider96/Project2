@@ -21,10 +21,9 @@ import com.p2.service.CommentService;
 /**
 * Comment Controller for accepting and sending data to the front-end angular application
 * 
-* @author Barton Carson
+* @author Barton Carson and John 
 * @since 2019-9-13
 */
-
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
 public class CommentController {
@@ -57,6 +56,11 @@ public class CommentController {
 		commentServ.insert(c);
 	}
 	
+	/**
+	 * Update controller method that updates the comment into the database
+	 * 
+	 * @param jsonString returned from the front-end 
+	 */
 	@PutMapping(value = "/updatecomment")
 	public void updatePost(@RequestBody String jsonString) {
 		Comment c = null;

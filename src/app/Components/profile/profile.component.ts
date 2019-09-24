@@ -86,6 +86,7 @@ export class ProfileComponent implements OnInit {
       this.profileForm.get('lastName').value,
       this.profileForm.get('phoneNumber').value
     );
+    localStorage.setItem('token', JSON.stringify(theUser));
     this.updateuser(theUser);
   }
 }

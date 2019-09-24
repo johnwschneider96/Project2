@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { AuthService } from 'src/app/Services/auth.service';
 import { NavbarService } from 'src/app/Services/navbar.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from 'src/app/Services/data.service';
 import { User } from 'src/app/Models/user';
 
 @Component({
@@ -21,8 +19,7 @@ export class ResetPasswordPageComponent implements OnInit {
     private nav: NavbarService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private http: HttpClient,
-    private data: DataService
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -55,12 +52,11 @@ export class ResetPasswordPageComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(localStorage.getItem('token'));
-    this.getuserbyemail(localStorage.getItem('token'));
+    this.getuserbyemail('lbcarson4@gmail.com');
     setTimeout(() => {
       const theUser = new User(
         this.myresponse.email,
-        localStorage.getItem('token'),
+        this.resetForm.get('password').value,
         this.myresponse.filename,
         this.myresponse.firstname,
         this.myresponse.lastname,

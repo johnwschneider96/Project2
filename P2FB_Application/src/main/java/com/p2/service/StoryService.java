@@ -11,7 +11,7 @@ import com.p2.repository.StoryDao;
 /**
  * Story service for added security between our story controller and story dao
  * 
- * @author Barton Carson & John Schneider
+ * @author Barton Carson and John Schneider
  * @since 2019-9-13
  */
 @Service

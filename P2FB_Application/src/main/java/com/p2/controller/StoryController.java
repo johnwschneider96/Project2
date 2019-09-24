@@ -21,7 +21,7 @@ import com.p2.service.StoryService;
 /**
  * Story Controller for accepting and sending data to the front-end angular application
  * 
- * @author Barton Carson
+ * @author Barton Carson and John Schneider
  * @since 2019-9-13
  */
 @RestController
@@ -42,7 +42,7 @@ public class StoryController {
 	/**
 	 * Insert controller method that inserts the story into the database
 	 * 
-	 * @param story the story object in the database
+	 * @param jsonString the string containing the story object
 	 */
 	@PostMapping(value = "/insertstory")
 	public void insertPost(@RequestBody String jsonString) {
@@ -59,7 +59,7 @@ public class StoryController {
 	/**
 	 * Controller method that updates the story in the database
 	 * 
-	 * @param story the story object in the database
+	 * @param jsonString the string containing the story object
 	 */
 	@PutMapping(value = "/updatestory")
 	public void updatePost(@RequestBody String jsonString) {

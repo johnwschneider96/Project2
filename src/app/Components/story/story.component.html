@@ -12,10 +12,10 @@
                                         width="40" height="40" alt="...">
                                 </a>
                             </div>
-                            <div class="media-body">
-                                <a href="#" class="anchor-username">
+                            <div class="media-body titleThing">
+                                
                                     <h4 class="media-heading">{{story.userEmail.firstname}} {{story.userEmail.lastname}}</h4>
-                                </a>
+                                
                             </div>
                         </div>
                     </div>
@@ -24,13 +24,13 @@
                     </div>
                 </div>
             </section>
-            <section class="post-body">
+            <section class="post-body titleThing">
                 <p>
                     {{story.content}}
                 </p>
             </section>
-            <button type="submit" class="btn btn-primary" (click)="addLike(story)">Like</button>
-            <p>{{story.numLikes}}</p>
+            <button type="submit" class="btn buttbutt" (click)="addLike(story)">Like</button>
+            <p class="likeColor">{{story.numLikes}}</p>
         </div>
     </div>
 </div>

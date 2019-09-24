@@ -29,12 +29,21 @@
     display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #000;
+    background-color: #341461;
     text-align: center;
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
   }
+
+  #submit:hover {
+    background-color: #563d7c;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  
   
   a {
     text-decoration: none;
@@ -43,5 +52,26 @@
   }
   
   button:hover, a:hover {
-    opacity: 0.7;
+    background-color: #563d7c;
   }
+  
+  .scooch{
+    margin-left: 6pt;
+    font-family: 'Roboto', sans-serif; 
+  }
+
+  .buttbutt {
+    background-color: #341461;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.buttbutt:hover {
+    background-color: #563d7c;
+    color: #ffffff;
+}
+
+.worthyTitle {
+  font-family: 'Inconsolata', monospace;
+  color:  #341461;
+}

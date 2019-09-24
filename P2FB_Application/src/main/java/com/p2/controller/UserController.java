@@ -22,7 +22,7 @@ import com.p2.service.UserService;
 /**
  * User Controller for accepting and sending data to the front-end angular application
  * 
- * @author Barton Carson & John Schneider
+ * @author Barton Carson and John Schneider
  * @since 2019-9-13
  */
 @RestController
@@ -43,7 +43,7 @@ public class UserController {
 	/**
 	 * Insert controller method that inserts the user in the database
 	 * 
-	 * @param user the user object in the database
+	 * @param jsonString the string containing the user object
 	 */
 	@PostMapping(value = "/insertuser")
 	public void insertUser(@RequestBody String jsonString) {
@@ -61,7 +61,7 @@ public class UserController {
 	/**
 	 * Controller method that updates the user in the database
 	 * 
-	 * @param user the user object in the database
+	 * @param jsonString the string containing the user object
 	 */
 	@PutMapping(value = "/updateuser")
 	public void updateUser(@RequestBody String jsonString) {

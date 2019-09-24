@@ -9,11 +9,26 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
+/**
+* Functions for encrypting and decrypting passwords put in to the database
+* 
+* @author Barton Carson 
+* @since 2019-9-13
+*/
 public class PasswordEncryption {
 
+	/**
+	 * salt string that goes in to encrypting/decrypting the string.
+	 */
 	private static String salt = "SaltyBacon";
 
-	//Encrypts the password using AES encryption
+	/**
+	 * Function to encrypt a given string
+	 * 
+	 * @param strToEncrypt the string that will be encrypted
+	 * @param secret the secret string used to encrypt the string
+	 * @return the encrypted string
+	 */
     public static String encrypt(String strToEncrypt, String secret) {
         try {
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -34,7 +49,13 @@ public class PasswordEncryption {
         return null;
     }
 
-    //Decrypts the password using AES encryption
+    /**
+	 * Function to decrypt a given string
+	 * 
+	 * @param strToDecrypt the string that will be decrypted
+	 * @param secret the secret string used to decrypt the string
+	 * @return the decrypted string
+	 */
     public static String decrypt(String strToDecrypt, String secret) {
         try {
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };

@@ -14,7 +14,7 @@ import com.p2.model.Story;
 /**
  * Story Dao for accessing the database
  * 
- * @author Barton Carson & John Schneider
+ * @author Barton Carson and John Schneider
  * @since 2019-9-13
  */
 @Repository("storyRepo")

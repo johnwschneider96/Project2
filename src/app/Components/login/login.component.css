@@ -38,7 +38,7 @@ top: -45px;
 }
 .input-group-prepend span{
 width: 50px;
-background-color: #28A745;
+background-color: #341461;
 color: white;
 border:0 !important;
 }
@@ -58,12 +58,13 @@ margin-right: 5px;
 }
 .login_btn{
 color: white;
-background-color: #28A745;
+background-color: #341461;
 width: 100px;
+font-family: 'Montserrat', sans-serif;
 }
 .login_btn:hover{
-color: black;
-background-color: white;
+color: #ffffff;
+background-color: #563d7c;
 }
 .links{
 color: white;
@@ -74,9 +75,13 @@ color: gold;
 }
 
 #footer {
-background-color: #28A745;
+background-color: #341461;
 color: #FFF;
 padding: 0px 5px 5px 0px;
 text-align: center;
 
+}
+
+.makeItNicer {
+  font-family: 'Quicksand', sans-serif;
 }

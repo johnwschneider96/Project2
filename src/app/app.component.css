@@ -51,3 +51,43 @@
       border: 1px solid #ccc;
     }
   }
+
+  .navdonk {
+    background-color: #341461;
+  }
+
+  .navdonk a{
+    color: #ffffff;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13pt;
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+
+  .navdonk a:hover {
+    background-color: #622dad;
+    color: #ffffff;
+  }
+
+  .scooch {
+    margin-left: 10pt;
+  }
+
+  .buttbutt {
+    background-color: #622dad;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.buttbutt:hover {
+    background-color: #563d7c;
+    color: #ffffff;
+}
+
+.dongo {
+  background-color: #622dad ;
+}
+
+.dongo2 {
+  background-color: #dd5c2e;
+}

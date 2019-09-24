@@ -5,7 +5,6 @@
     <p class="title">{{myUserData.email}}</p>
     <p>{{myUserData.phonenumber}}</p>
   </div>
-  <app-create-post></app-create-post>
   <div *ngFor="let s of myresponse">
     <app-story [story]="s"></app-story>
   </div>

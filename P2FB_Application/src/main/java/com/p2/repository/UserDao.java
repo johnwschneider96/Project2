@@ -12,7 +12,7 @@ import com.p2.model.User;
 /**
  * User Dao for accessing the database
  * 
- * @author Barton Carson & John Schneider
+ * @author Barton Carson and John Schneider
  * @since 2019-9-13
  */
 @Repository("userRepo")

@@ -30,7 +30,7 @@ export class CommentComponent implements OnInit {
 
   addLike(comment: Comment) {
     comment.numLikes = comment.numLikes + 1;
-    this.http.put('http://localhost:9005/P2FB_Application/updatestory', JSON.stringify(comment)).subscribe(
+    this.http.put('http://localhost:9005/P2FB_Application/updatecomment', JSON.stringify(comment)).subscribe(
       data => {
       },
       error => {

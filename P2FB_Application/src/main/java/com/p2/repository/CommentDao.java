@@ -11,6 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.p2.model.Comment;
 
+/**
+ * Comment Dao
+ * 
+ * @author Barton Carson and John Schneider
+ * @since 2019-9-13
+ */
 @Repository("commentRepo")
 @Transactional
 public class CommentDao {
